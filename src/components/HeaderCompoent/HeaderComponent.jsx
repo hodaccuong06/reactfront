@@ -108,7 +108,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
   }
 
   return (
-    <div style={{  heiht: '100%', width: '100%', display: 'flex',background: '#fadb14', justifyContent: 'center' }}>
+    <div style={{  heiht: '100%', width: '100%', display: 'flex',background: 'rgb(255, 212, 0)', justifyContent: 'center' }}>
       <WrapperHeader style={{ justifyContent: isHiddenSearch && isHiddenSearch ? 'space-between' : 'unset' }}>
         <Col span={5}>
           <WrapperTextHeader to='/' ><img src="https://png.pngtree.com/png-vector/20220722/ourmid/pngtree-hand-and-oil-drip-logo-design-png-image_6033330.png" width="50px" height="50px"></img></WrapperTextHeader>
