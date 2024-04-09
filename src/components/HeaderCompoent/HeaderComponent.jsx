@@ -2,6 +2,9 @@ import { Badge, Button, Col, Popover } from 'antd'
 import React from 'react'
 import { WrapperContentPopup, WrapperHeader, WrapperHeaderAccout, WrapperTextHeader, WrapperTextHeaderSmall } from './style'
 import {
+  LoginOutlined,
+  PhoneFilled,
+  UserSwitchOutlined,
   UserOutlined,
   CaretDownOutlined,
   ShoppingCartOutlined
@@ -15,6 +18,9 @@ import { useState } from 'react';
 import Loading from '../LoadingComponent/Loading';
 import { useEffect } from 'react';
 import { searchProduct } from '../../redux/slides/productSlide';
+import TypeProduct from '../../components/TypeProduct/TypeProduct';
+import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from './style';
+import * as ProductService from '../../services/ProductService';
 
 
 const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
@@ -27,6 +33,21 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
   const [isOpenPopup, setIsOpenPopup] = useState(false)
   const order = useSelector((state) => state.order)
   const [loading, setLoading] = useState(false)
+  const [typeProducts, setTypeProducts] = useState([]);
+
+
+  const fetchAllTypeProduct = async () => {
+    const res = await ProductService.getAllTypeProduct();
+    if (res?.status === 'OK') {
+      setTypeProducts(res?.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllTypeProduct();
+  }, []);
+
+
   const handleNavigateLogin = () => {
     navigate('/sign-in')
   }
@@ -104,9 +125,16 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
               onChange={onSearch}
               backgroundColorButton="#5a20c1"
             />
+      <div style={{ width: '100%', margin: '0 auto', marginBottom: '20px', fontWeight:'bold', marginTop:'5px'}} >
+        <WrapperTypeProduct style={{marginBottom:'-15px'}}>
+          {typeProducts.map((item) => (
+            <TypeProduct  name={item} key={item} color = {'#FF0000'}/>
+          ))}
+        </WrapperTypeProduct>
+      </div>
           </Col>
         )}
-        <Col span={6} style={{ display: 'flex', gap: '54px', alignItems: 'center' }}>
+        <Col span={6} style={{ display: 'flex', gap: '54px', marginTop:'5px'}}>
           <Loading isPending ={loading}>
             <WrapperHeaderAccout>
               {userAvatar ? (
@@ -117,7 +145,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                   objectFit: 'cover'
                 }} />
               ) : (
-                <UserOutlined style={{ fontSize: '30px' , color:'#000000'}} />
+             
+                <LoginOutlined style={{ fontSize: '30px' , color:'#000000'}} />
               )}
               {user?.access_token ? (
                 <>
@@ -139,14 +168,17 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
           {!isHiddenCart && !user?.isAdmin && !isHomePage && isLoggedIn && (
             <div onClick={() => navigate('/order')} style={{cursor: 'pointer'}}>
               <Badge count={order?.orderItems?.length} size="small">
+  
                 <ShoppingCartOutlined style={{ fontSize: '30px', color:'#000000' }} />
               </Badge>
-              <WrapperTextHeaderSmall style={{color:'#000000'}}>Giỏ hàng</WrapperTextHeaderSmall>
+              <WrapperTextHeaderSmall style={{color:'#000000',fontSize:'15px', fontWeight:'bold'}}><i class="iconnewglobal-cart" >Shopping Cart</i></WrapperTextHeaderSmall>
             </div>
           )}
         </Col>
       </WrapperHeader>
+      
     </div>
+    
   )
 }
 

@@ -1,72 +1,42 @@
-import React from 'react'
-import { Lable, WrapperInfo, WrapperContainer, WrapperValue, WrapperItemOrder, WrapperItemOrderInfo } from './style';
+import React from 'react';
+import { WrapperContainer, WrapperInfo, Lable, WrapperItemOrder, WrapperItemOrderInfo, WrapperValue } from './style';
 import Loading from '../../components/LoadingComponent/Loading';
 import { useLocation } from 'react-router-dom';
 import { orderContant } from '../../contant';
 import { convertPrice } from '../../utils';
 
+const OrderSuccess = () => {
+  const location = useLocation();
+  const { state } = location;
 
-const OrderSucess = () => {
-  const location = useLocation()
-  const {state} = location
   return (
-    <div style={{background: '#f5f5fa', with: '100%', height: '100vh'}}>
-      <Loading isPending ={false}>
-        <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
-          <h3>Đơn hàng đặt thành công</h3>
-          <div style={{ display: 'flex', justifyContent: 'center'}}>
-            <WrapperContainer>
-              {/* <WrapperInfo>
+    <div style={{ background: '#f5f5fa', width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Loading isPending={false}>
+        <WrapperContainer>
+          <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Order Placed Successfully</h2>
+          <WrapperInfo>
+            <Lable>Payment Method:</Lable>
+            <WrapperValue>{orderContant.payment[state?.payment]}</WrapperValue>
+          </WrapperInfo>
+          <WrapperItemOrderInfo>
+            {state.orders?.map((order, index) => (
+              <WrapperItemOrder key={index}>
+                <img src={order.image} alt={order.name} style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '20px' }} />
                 <div>
-                  <Lable>Phương thức giao hàng</Lable>
-                    <WrapperValue>
-                      <span style={{color: '#ea8500', fontWeight: 'bold'}}>{orderContant.delivery[state?.delivery]}</span> Giao hàng tiết kiệm
-                    </WrapperValue>
+                  <h3>{order.name}</h3>
+                  <p style={{ marginBottom: '10px' }}>Price: {convertPrice(order.price)}</p>
+                  <p>Quantity: {order.amount}</p>
                 </div>
-              </WrapperInfo> */}
-              <WrapperInfo>
-                <div>
-                  <Lable>Phương thức thanh toán</Lable>
-                
-                  <WrapperValue>
-                    {orderContant.payment[state?.payment]}
-                  </WrapperValue>
-                </div>
-              </WrapperInfo>
-              <WrapperItemOrderInfo>
-                {state.orders?.map((order) => {
-                  return (
-                    <WrapperItemOrder key={order?.name}>
-                      <div style={{width: '500px', display: 'flex', alignItems: 'center', gap: 4}}> 
-                        <img src={order.image} alt='' style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
-                        <div style={{
-                          width: 260,
-                          overflow: 'hidden',
-                          textOverflow:'ellipsis',
-                          whiteSpace:'nowrap'
-                        }}>{order?.name}</div>
-                      </div>
-                      <div style={{flex: 1, display: 'flex', alignItems: 'center',gap: '10px'}}>
-                        <span>
-                          <span style={{ fontSize: '13px', color: '#242424' }}>Giá tiền: {convertPrice(order?.price)}</span>
-                        </span>
-                        <span>
-                          <span style={{ fontSize: '13px', color: '#242424' }}>Số lượng: {order?.amount}</span>
-                        </span>
-                      </div>
-                    </WrapperItemOrder>
-                  )
-                })}
-              </WrapperItemOrderInfo>
-              <div>
-                <span style={{ fontSize: '16px', color: 'red' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
-              </div>
-            </WrapperContainer>
+              </WrapperItemOrder>
+            ))}
+          </WrapperItemOrderInfo>
+          <div style={{ textAlign: 'right', marginTop: '30px' }}>
+            <h3>Total: {convertPrice(state?.totalPriceMemo)}</h3>
           </div>
-        </div>
+        </WrapperContainer>
       </Loading>
     </div>
-  )
-}
+  );
+};
 
-export default OrderSucess
+export default OrderSuccess;

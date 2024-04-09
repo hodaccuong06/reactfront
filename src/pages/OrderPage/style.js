@@ -73,6 +73,7 @@ export const WrapperInfo = styled.div`
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
   width: 100%
+
 `
 
 export const WrapperTotal = styled.div`

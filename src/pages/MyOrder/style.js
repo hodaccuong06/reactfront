@@ -1,83 +1,51 @@
-import styled  from "styled-components";
-
-export const WrapperStyleHeader = styled.div`
-  background: rgb(255, 255, 255);
-  padding: 9px 16px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  span {
-    color: rgb(36, 36, 36);
-    font-weight: 400;
-    font-size: 13px;
-  }
-`
-export const WrapperStyleHeaderDilivery = styled.div`
-  background: rgb(255, 255, 255);
-  padding: 9px 16px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  span {
-    color: rgb(36, 36, 36);
-    font-weight: 400;
-    font-size: 13px;
-  };
-  margin-bottom: 4px;
-`
+import styled from 'styled-components';
 
 export const WrapperContainer = styled.div`
-  width: 100%;
-  background-color: #f5f5fa;
-`
-
-export const WrapperLeft = styled.div`
-  width: 910px;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const WrapperListOrder = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 20px;
-`
-export const WrapperFooterItem = styled.div`
-  display: flex;
-  flex-direction : column;
-  gap: 10px;
-  border-top: 1px solid rgb(235, 235, 240);
-  width: 100%;
-  align-items:flex-end;
-  padding-top: 10px;
-`
-
-export const WrapperHeaderItem = styled.div`
-  display: flex;
-  align-items:flex-start;
-  height: 90px;
-  width: 100%;
-`
+  /* CSS cho danh sách đơn hàng */
+`;
 
 export const WrapperItemOrder = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 9px 16px;
-  background: #fff;
-  margin-top: 12px;
-  flex-direction: column;
-  width: 950px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 12px 12px #ccc;
-`
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: rgba(240, 255, 255, 1);
+  position: relative;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  cursor: alias;
+  transition: transform 0.95s ease;
+
+  &:hover {
+    transform: scale(1.2); /* Scale lớn hơn khi hover */
+  }
+`;
+
+export const WrapperHeaderItem = styled.div`
+  /* CSS cho phần tiêu đề của mỗi mục đơn hàng */
+`;
+
+export const WrapperFooterItem = styled.div`
+  /* CSS cho phần chân trang của mỗi mục đơn hàng */
+`;
 
 export const WrapperStatus = styled.div`
-  display:flex;
-  align-item:flex-start;
-  width: 100%;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(235, 235, 240);
-  flex-direction:column;
-`
+  /* CSS cho trạng thái đơn hàng */
+`;
+
+export const ButtonContainer = styled.div`
+  /* CSS cho container của các nút */
+`;
+
+export const Button = styled.button`
+  /* CSS cho nút */
+`;
+
+export const ActionButton = styled.button`
+  /* CSS cho nút hành động */
+`;
+

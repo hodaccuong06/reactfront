@@ -110,7 +110,7 @@ const ProductDetailsComponent = ({idProduct}) => {
                         <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
                     </WrapperPriceProduct>
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
-                        <div style={{ marginBottom: '10px' }}>Số lượng</div>
+                        <div style={{ marginBottom: '10px' }}>Amount</div>
                         <WrapperQualityProduct>
                             <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
@@ -120,10 +120,6 @@ const ProductDetailsComponent = ({idProduct}) => {
                                 <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
                         </WrapperQualityProduct>
-                    </div>
-                    <div  style={{ margin: '10px 0 20px', padding: '10px 0', borderBottom: '1px solid #e5e5e5' }}>
-                    <span style={{fontWeight: '900'}}>Descriptions: </span>
-                         <span>{productDetails?.description}</span>
                     </div>
                     <div style={{ display: 'flex', aliggItems: 'center', gap: '12px' }}>
                         <div>
@@ -143,15 +139,13 @@ const ProductDetailsComponent = ({idProduct}) => {
                             {errorLimitOrder && <div style={{color: 'red'}}>Out of stock</div>}
                         </div>
                     </div>
+                    <div  style={{ margin: '10px 0 20px', padding: '10px 0'}}>
+                    <span style={{fontWeight: '900'}}>Descriptions: </span>
+                         <span>{productDetails?.description}</span>
+                    </div>
                 </Col>
-                {/* {!user?.isAdmin && (<CommentComponent 
-                //    value={productDetails.idProduct}
-                    idProduct = {idProduct}
-                    style = {{width:'1270px'}}
-                />) } */}
-                
             </Row>
-            
+        
         </Loading>
     )
 }

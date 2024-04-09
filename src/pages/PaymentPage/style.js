@@ -80,10 +80,9 @@ export const Lable = styled.span`
 
 export const WrapperRadio = styled(Radio.Group)`
   margin-top: 6px;
+  text-Align:center
   background: rgb(240, 248, 255);
-  border: 1px solid rgb(194, 225, 255);
   width: 500px;
-  border-radius: 4px;
   height: 100px;
   padding: 16px;
   font-weight: normal;

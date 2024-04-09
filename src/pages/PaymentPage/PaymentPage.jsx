@@ -82,6 +82,10 @@ const PaymentPage = () => {
     }else if(priceMemo >= 5000000 && priceMemo < 50000000) {
       return 200000
     } else if(priceMemo >= 50000000) {
+      return 1
+    }else if(priceMemo < 2000000 && priceMemo > 0){
+      return 100000
+    }else if(!priceMemo){
       return 0
     }
   },[priceMemo])
@@ -238,54 +242,56 @@ const PaymentPage = () => {
       setSdkReady(true)
     }
   }, [])
+  const handleHomeClick = () => {
+    navigate('/');
+  };
 
   return (
-    <div style={{background: '#f5f5fa', with: '100%', height: '100vh'}}>
+    <div style={{ with: '100%', height: '100vh', background: 'rgba(192,192,192,0.5)'}}>
       <Loading isPending ={isPendingAddOrder}>
-        <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
-          <h3>Thanh toán</h3>
-          <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <div style={{height: '100%', width: '1270px', margin: '0 auto', }}>
+        <span onClick={handleHomeClick} style={{fontWeight:'600', cursor:'grabbing'}}>Home</span>-Payment
+          <div style={{backgroundColor: '#fff' ,display: 'flex', justifyContent: 'center', border:'1px solid',width:'500px', height:'480px', borderRadius:'4px', marginLeft:'420px', marginTop:'10px'}}>
+            <WrapperRight>
             <WrapperLeft>
-              <WrapperInfo>
-                <div>
-                  <Lable>Chọn phương thức thanh toán</Lable>
-                  <WrapperRadio onChange={handlePayment} value={payment}> 
-                    <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
-                    <Radio value="paypal"> Thanh toán tiền bằng paypal</Radio>
+              {/* <WrapperInfo> */}
+                <div  style={{textAlign:'center', marginLeft:'100px'}}>
+                  <Lable style={{marginRight:'100px', fontSize:'25px'}}>Select a payment method</Lable>
+                  <WrapperRadio style={{display:'inline-block', marginRight:'100px'}} onChange={handlePayment} value={payment}> 
+                    <Radio value="later_money"> Pay cash upon receipt</Radio>
+                    <Radio value="paypal">Payment by paypal </Radio>
                   </WrapperRadio>
                 </div>
-              </WrapperInfo>
+              {/* </WrapperInfo> */}
             </WrapperLeft>
-            <WrapperRight>
-              <div style={{width: '100%'}}>
-                <WrapperInfo>
-                  <div>
-                    <span>Địa chỉ: </span>
-                    <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
-                    <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
-                  </div>
-                </WrapperInfo>
-                <WrapperInfo>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Tạm tính</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceMemo)}</span>
-                  </div>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Giảm giá</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceDiscountMemo)}</span>
-                  </div>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Phí giao hàng</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(diliveryPriceMemo)}</span>
-                  </div>
-                </WrapperInfo>
-                <WrapperTotal>
-                  <span>Tổng tiền</span>
-                  <span style={{display:'flex', flexDirection: 'column'}}>
-                    <span style={{color: 'rgb(254, 56, 52)', fontSize: '24px', fontWeight: 'bold'}}>{convertPrice(totalPriceMemo)}</span>
-                    <span style={{color: '#000', fontSize: '11px'}}>(Đã bao gồm VAT nếu có)</span>
-                  </span>
-                </WrapperTotal>
+              <div style={{width: '100%', marginTop:'-50px'}}>
+              <WrapperInfo>
+              <WrapperInfo>
+                <div style={{textAlign:'center'}}>
+                  <span>Address: </span>
+                  <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
+                  <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Change</span>
+                </div>
+              </WrapperInfo>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <span>Price :</span>
+                  <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceMemo)}</span>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <span>Discount :</span>
+                  <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceDiscountMemo)}</span>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <span>Delivery fee : </span>
+                  <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(diliveryPriceMemo)}</span>
+                </div>
+              </WrapperInfo>
+              <WrapperTotal>
+                <span style={{fontSize:'20px'}}>Total: </span>
+                <span style={{display:'flex', flexDirection: 'column'}}>
+                  <span style={{color: 'rgb(0,255,255)', fontSize: '20px', fontWeight: 'bold'}}>{convertPrice(totalPriceMemo)}</span>
+                </span>
+              </WrapperTotal>
               </div>
               {payment === 'paypal' && sdkReady ? (
                 <div style={{width: '320px'}}>
@@ -308,7 +314,7 @@ const PaymentPage = () => {
                       border: 'none',
                       borderRadius: '4px'
                   }}
-                  textbutton={'Đặt hàng'}
+                  textbutton={'Order'}
                   styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
               ></ButtonComponent>
               )}

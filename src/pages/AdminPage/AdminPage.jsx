@@ -1,4 +1,5 @@
 import { Menu } from 'antd'
+import { Breadcrumb, Layout, theme } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { getItem } from '../../utils';
 import { UserOutlined, AppstoreOutlined, ShoppingCartOutlined } from '@ant-design/icons'
@@ -13,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import Loading from '../../components/LoadingComponent/Loading';
+const { Header, Content, Footer } = Layout;
 
 const AdminPage = () => {
   const user = useSelector((state) => state?.user)
@@ -94,17 +96,30 @@ const AdminPage = () => {
   return (
     <>
       <HeaderComponent isHiddenSearch isHiddenCart />
-      <div style={{ display: 'flex',overflowX: 'hidden' }}>
+      {/* <div style={{ display: 'flex',overflowX: 'hidden' }}> */}
+      <Header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div className="demo-logo" />
         <Menu
-          mode="inline"
-          style={{
-            width: 256,
-            boxShadow: '1px 1px 2px #ccc',
-            height: '100vh'
-          }}
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
           items={items}
           onClick={handleOnCLick}
+          style={{
+            flex: 1,
+            minWidth: 0,
+          }}
         />
+        </Header>
         <div style={{ flex: 1, padding: '15px 0 15px 15px' }}>
             {!keySelected && (
               <div>
@@ -113,7 +128,7 @@ const AdminPage = () => {
             )}
           {renderPage(keySelected)}
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }

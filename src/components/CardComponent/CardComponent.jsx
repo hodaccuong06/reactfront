@@ -12,25 +12,30 @@ const CardComponent = (props) => {
         navigate(`/product-details/${id}`)
     }
     return (
+        
         <WrapperCardStyle
             hoverable
             headStyle={{ width: '200px', height: '200px' }}
-            style={{ width: 200 }}
+            style={{ width: 200 , position:'relative'}}
             bodyStyle={{ padding: '10px' }}
-            cover={<img alt="example" src={image} />}
+            // cover1={<img src="https://cdn.tgdd.vn/2023/12/campaign/Label-Desk-270x106-1.png"/>}
+            cover={<img alt="example" src={image} style={{marginTop:'50px'}}/>}
             onClick={() =>  handleDetailsProduct(id)}
         >
-            {/* <img
-                src={logo}
+            <div>
+            <img
+                src="https://cdn.tgdd.vn/2023/12/campaign/Label-Desk-270x106-1.png"
                 style={{
-                    width: '68px',
-                    height: '14px',
+                    width: '100%',
+                    height: '50px',
                     position: 'absolute',
                     top: -1,
                     left: -1,
                     borderTopLeftRadius: '3px'
                 }}
-            /> */}
+            />
+            </div>
+            <div >
             <StyleNameProduct>{name}</StyleNameProduct>
             <WrapperReportText>
                 <span style={{ marginRight: '4px' }}>
@@ -44,6 +49,8 @@ const CardComponent = (props) => {
                      -{discount}%
                 </WrapperDiscountText>
             </WrapperPriceText>
+            </div>
+            
         </WrapperCardStyle>
     )
 }
